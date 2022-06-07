@@ -20,6 +20,6 @@
   },
   "scripts": {
     "dev": "hexo server -p $PORT",
-    "build": "hexo generate"
+    "build": "git submodule update --init --recursive && git submodule update --recursive --remote && npm install &&  hexo generate"
   }
 }
