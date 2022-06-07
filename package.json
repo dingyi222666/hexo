@@ -20,6 +20,6 @@
   },
   "scripts": {
     "dev": "hexo server -p $PORT",
-    "build": "git submodule update --init --recursive && git submodule update --recursive --remote && npm install &&  hexo generate"
+    "build": "bash ./vercel.sh"
   }
 }
