@@ -16,7 +16,7 @@ menu:
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: light #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: mac #  darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -50,7 +50,7 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: false
+  enable: true
   preload: false
   CDN:
 
@@ -115,9 +115,9 @@ category_per_img: https://s1.328888.xyz/2022/06/08/zjpaB.jpg
 
 cover:
   # display the cover or not (是否顯示文章封面)
-  index_enable: true
+  index_enable: false
   aside_enable: true
-  archives_enable: false
+  archives_enable: true
   # the position of cover in home page (封面顯示的位置)
   # left/right/both
   position: both
@@ -502,7 +502,7 @@ tag_ui: # 留空或 index
 background: url(https://s1.328888.xyz/2022/06/08/zjpaB.jpg)
 
 # Footer Background
-footer_bg: transparent
+footer_bg: rgba(0,0,0,0)
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
@@ -835,6 +835,7 @@ css_prefix: true
 inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
+    - <link rel="stylesheet" href="../butterfly_css/main.css">
   bottom:
     # - <script src="xxxx"></script>
 
