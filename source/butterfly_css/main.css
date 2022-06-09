@@ -1,0 +1,16 @@
+#footer {
+  backdrop-filter: saturate(180%) blur(5px); 
+  background: rgba(0,0,0,0) !important;
+}
+
+#page-header {
+  background: transparent !important;
+}
+
+#page-header.post-bg:before {
+  background-color: rgba(0,0,0,0) !important;
+}
+
+#page-header:not(.not-top-img):before {
+  background-color: rgba(0,0,0,0);
+}
