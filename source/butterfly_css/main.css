@@ -94,7 +94,10 @@
 }
 
 @media only screen and (max-width: 768px) {
-  #web-bg {
-    background: url(https://cdn.jsdelivr.net/gh/dingyi222666/hexo/source/images/background-moblie.jpg) !important;
+  #web_bg {
+    background: url(https://cdn.staticaly.com/gh/dingyi222666/hexo/main/source/images/background-mobile.jpg) !important;
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
   }
 }

@@ -500,7 +500,7 @@ tag_ui: # 留空或 index
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
 # background: url(https://s1.328888.xyz/2022/06/08/zjpaB.jpg)
-background: url(https://cdn.jsdelivr.net/gh/dingyi222666/hexo/source/images/background.jpg)
+background: url(https://cdn.staticaly.com/gh/dingyi222666/hexo/main/source/images/background.jpg)
 
 # Footer Background
 footer_bg:
@@ -571,7 +571,7 @@ ClickShowText:
 
 # Default display mode (網站默認的顯示模式)
 # light (default) / dark
-display_mode: light
+display_mode: dark
 
 # Beautify (美化頁面顯示)
 beautify:
