@@ -96,7 +96,7 @@
 @media only screen and (max-width: 768px) {
   #web_bg {
     background: url(https://cdn.staticaly.com/gh/dingyi222666/hexo/main/source/images/background-mobile.jpg) !important;
-    background-size: contain !important;
+    background-size:  100vw 100vh !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
   }
