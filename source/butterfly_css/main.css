@@ -93,8 +93,8 @@
   color: var(--font-color) !important;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   #web-bg {
-    background: url(https://cdn.jsdelivr.net/gh/dingyi222666/hexo/source/images/background.jpg);
+    background: url(https://cdn.jsdelivr.net/gh/dingyi222666/hexo/source/images/background-moblie.jpg) !important;
   }
 }
