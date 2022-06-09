@@ -7,10 +7,7 @@
   background: transparent !important;
 }
 
-#page-header.post-bg:before {
-  background-color: rgba(0, 0, 0, 0) !important;
-}
-
+#page-header.post-bg:before,
 #page-header:not(.not-top-img):before {
   background-color: rgba(0, 0, 0, 0) !important;
 }
@@ -25,7 +22,8 @@
 }
 
 /*侧边栏页面*/
-#aside-content>.card-widget #aside-content>.sticky_layout>.card-widget,
+#aside-content>.card-widget,
+#aside-content>.sticky_layout>.card-widget,
 .layout>#post,
 .layout>#page,
 .layout>#archive {
@@ -49,21 +47,54 @@
   background: rgba(128, 128, 128, .5) !important;
 }
 
+/* 调整夜间模式透明度 */
+[data-theme='dark'] #web_bg:before,
+/* [data-theme='dark'] #footer:before, */
+[data-theme='dark'] #page-header:before {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  content: '' !important;
+}
+
+[data-theme='dark'] #page-header.post-bg:before,
+[data-theme='dark'] #page-header:not(.not-top-img):before {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+[data-theme='dark'] #footer:before {
+  background: rgba(0, 0, 0, 0) !important;
+}
+
+/* 滑动变色也透明*/
+#page-header.nav-fixed>#nav,
+#page-header.not-top-img>#nav,
+[data-theme='dark'] #page-header.nav-fixed>#nav,
+[data-theme='dark'] #page-header.not-top-img>#nav {
+  background: rgba(0, 0, 0, 0) !important;
+
+}
+
 /* 阅读模式显示背景*/
 .read-mode #web_bg {
   display: block !important;
 }
 
-#post-info .post-title,
+/* #post-info .post-title,
 #post-info #post-meta {
   color: var(--font-color) !important;
-}
+} */
 
 #footer-wrap {
   color: var(--font-color) !important;
 }
 
+
 #page-header #site-title,
 #page-header #site-subtitle {
-  color: #858585 !important;
+  color: var(--font-color) !important;
+}
+
+@media screen and (max-width: 768px) {
+  #web-bg {
+    background: url(https://cdn.jsdelivr.net/gh/dingyi222666/hexo/source/images/background.jpg);
+  }
 }
