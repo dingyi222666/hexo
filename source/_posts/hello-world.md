@@ -2,38 +2,24 @@
 title: Hello World
 ---
 
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
-
-## Quick Start
-
-### Create a new post
-
-```bash
-$ hexo new "My New Post"
+```lua
+print("Hello World")
 ```
 
-More info: [Writing](https://hexo.io/docs/writing.html)
+你好，很高兴你看到了这篇博文，这是我的第一篇博文。（其实在之前我已经反复搭建了好几次博客，但是数据都丢失了。。。所以这算是第一篇了吧）
 
-### Run server
+## 为什么要搭建博客
 
-```bash
-$ hexo server
-```
+搭建博客的好处挺多的，比如可以把写代码过程中的某些点写出来整理成一篇博文，也可以写点对事情什么的看法。让自己成为一个内容的生产者，也可以更好的回顾和积累自己的知识和思想。
 
-More info: [Server](https://hexo.io/docs/server.html)
+## 为什么选择静态博客
 
-### Generate static files
+静态博客不需要额外去维护网站的运营（甚至是白嫖），博文存放在github等代码托管平台上，部署前上传，不需要担心数据丢失的问题。虽然静态博客需要去部署生成静态网页文件，但是对于大部分用户来说根本就没有那么多博文，速度完全可以接受
 
-```bash
-$ hexo generate
-```
+## 这个博客的主要内容？
 
-More info: [Generating](https://hexo.io/docs/generating.html)
+个人更偏向于记录日常写代码的部分技巧的，技术类的博客。自己的文笔和知识水平有限，也没法发散去聊其他东西（比如时事）。
 
-### Deploy to remote sites
+## 结语
 
-```bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/deployment.html)
+搭建静态博客其实并不难，用[vercel](https://vercel.com)几分钟就可以搭建出来了，但是对我来说难点还是在于写博文。我已经习惯当成内容的消费者太久了，没怎么想着去怎么生产内容，希望我能坚持下去运营着这个博客吧。
