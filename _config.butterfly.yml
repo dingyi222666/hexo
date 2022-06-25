@@ -852,6 +852,14 @@ CDN:
   # option: local/jsdelivr/unpkg
   # when set it to local, you need to install hexo-butterfly-extjs
   third_party_provider: unpkg
+
+  # Add version number to CDN, true or false  
+  version: false
+
+  # Custom format
+  # For example: https://cdn.staticfile.org/${cdnjs_name}/${version}/${min_cdnjs_file}
+  custom_format:
+  
   option:
     # main_css:
     # main:
