@@ -164,7 +164,7 @@ wordcount:
 # 3: auto_excerpt (default)
 # false: do not show the article introduction
 index_post_content:
-  method: 3
+  method: 1
   length: 500 # if you set method to 2 or 3, the length need to config
 
 # anchor
@@ -640,7 +640,7 @@ aside:
       link: https://github.com/dingyi222666
   card_announcement:
     enable: true
-    content: 欢迎来到dingyi的博客，偶尔会写点啥。
+    content: 夜空に咲く花を摘んで，瞬く星を束ねて，君にあげる。
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
