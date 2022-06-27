@@ -640,7 +640,7 @@ aside:
       link: https://github.com/dingyi222666
   card_announcement:
     enable: true
-    content: dingyi's Blog
+    content: 欢迎来到dingyi的博客，偶尔会写点啥。
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
