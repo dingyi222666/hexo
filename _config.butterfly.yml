@@ -500,7 +500,7 @@ tag_ui: # 留空或 index
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
 # background: url(https://s1.328888.xyz/2022/06/08/zjpaB.jpg)
-background: url(https://cdn.staticaly.com/gh/dingyi222666/hexo/main/source/images/background.jpg)
+background: url(https://cdn.staticaly.com/gh/dingyi222666/gitalk-comments/main/background.jpg)
 
 # Footer Background
 footer_bg:
@@ -836,7 +836,7 @@ css_prefix: true
 inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
-    - <link rel="stylesheet" href="/butterfly_css/main.css">
+    - <link rel="stylesheet" href="/data/main.css">
   bottom:
     # - <script src="xxxx"></script>
 
