@@ -264,7 +264,7 @@ comments:
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
-  lazyload: false
+  lazyload: true
   count: false # Display comment count in post's top_img
   card_post_count: false # Display comment count in Home Page
 
@@ -290,11 +290,11 @@ livere:
 # gitalk
 # https://github.com/gitalk/gitalk
 gitalk:
-  client_id:
-  client_secret:
-  repo:
-  owner:
-  admin:
+  client_id: ee1fb987b3079fb315da
+  client_secret: deca8d9aea31dbb6fe6effafa77580ca1c9ccdf2
+  repo: gitalk-comments
+  owner: dingyi222666
+  admin: dingyi222666
   option:
 
 # valine
