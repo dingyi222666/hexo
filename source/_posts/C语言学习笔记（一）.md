@@ -68,3 +68,105 @@ int main() {
 ![image.png](https://s2.loli.net/2022/07/01/tZ9JwvLqMDkHb1R.png)
 
 很好，这就是我们的第一个c程序！
+
+### 课后扩展练习
+
+看了下论坛里的[课后作业](https://fishc.com.cn/thread-66283-1-1.html)，好家伙...
+
+不过都说让我们抄了，那问题不大，搜索一下就有了
+
+直接搜可能搜不出来，这时候我们得缝合搜索，比如搜索`统计文件行数`,`遍历文件夹`来多次获取结果，再把他缝一起。
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+#include <unistd.h>
+#define MAX 256
+
+long total;
+
+int countLines(const char *filename);
+int forEachDir(const char *dirpath);
+
+int countLines(const char *filename)
+{
+  FILE *fp;
+  int count = 0;
+  int temp;
+  if ((fp = fopen(filename, "r")) == NULL)
+  {
+    fprintf(stderr, "Can not open the file：%s\n", filename);
+    return 0;
+  }
+  while ((temp = fgetc(fp)) != EOF)
+  {
+    if (temp == '\n')
+    {
+      count++;
+    }
+  }
+  fclose(fp);
+  return count;
+}
+
+int forEachDir(const char *dirpath)
+{
+  DIR *dir;
+  char pathname[MAX];                //目录的全名，=当前目录名+子目录名
+  if ((dir = opendir(dirpath)) == 0) //无法打开则跳过
+  {
+    printf("open %s failed!\n", dirpath);
+    return -1;
+  }
+
+  struct dirent *stdir;
+
+  while (1)
+  {
+    if ((stdir = readdir(dir)) == 0)
+      break; //遍历完一整个文件夹就停止循环
+
+    sprintf(pathname, "%s/%s", dirpath, stdir->d_name); //获得目录全名（当前目录名 + 子目录名）
+
+    if (stdir->d_type == 8) //文件则输出
+    {
+      int length = strlen(stdir->d_name);
+      if (strcmp((stdir->d_name) + (length - 2), ".c") == 0)
+      {
+        total += countLines(pathname);
+      }
+    }
+    else // if(stdir->d_type == 4)//文件夹则递归进行下一轮，打开文件夹
+    {
+      if (!strcmp(stdir->d_name, ".") || !strcmp(stdir->d_name, ".."))
+        continue;
+
+      forEachDir(pathname);
+    }
+  }
+  closedir(dir); //关闭目录
+  return 0;
+}
+
+int main()
+{
+  char path[MAX] = ".";
+  getcwd(path, sizeof(path));
+  printf("计算中...\n");
+
+  int success = forEachDir(path);
+  if (success != 0)
+  {
+    printf("遍历文件失败");
+    return -1;
+  }
+  printf("目前你总共写了 %ld 行代码！\n\n", total);
+  pause();
+  return 0;
+}
+
+```
+
+上面的代码就是我缝出来的例子，自己也有写了一点，就感觉c语言的字符串处理真麻烦...我想念其他语言了。
