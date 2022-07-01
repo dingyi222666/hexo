@@ -8,6 +8,7 @@ tags:
   - AndroLua
   - Lua
 cover: https://s2.loli.net/2022/06/28/l3PFWxeEKMpQIBV.png
+description: 轻松破解andlua的抽代码到dex
 ---
 
 ## 前言
@@ -205,7 +206,6 @@ public class AndluaTool {
 }
 ```
 
-
 可以看到，最核心的解密方法是`decrypt(String, String)`，前面我们看到的`decrypt(String,int)`也是调用了这个方法，但是对传的第二个参数做了层层运算。从这里我们也可以判断出第二个参数就是密钥，第一个参数就是待解密的字符串。
 
 下面来分析下`decrypt(String,int)`里面对第二个参数(密钥)的处理。
@@ -320,6 +320,5 @@ fun main() {
 今天好好折腾了一下这个拉胯的不行的抽代码到dex的破解，这种所谓加密加固可以说是只防小白了。。。
 
 不过考虑到andlua现在也差不多g了，那只能说是好似了。
-
 
 样本下载地址：[https://wwc.lanzoul.com/iZXEV0716nyh](https://wwc.lanzoul.com/iZXEV0716nyh)

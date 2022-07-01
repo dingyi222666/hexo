@@ -18,7 +18,6 @@ cover: https://s2.loli.net/2022/06/28/nglZKh8Mivc3BAF.png
 
 但虽然ipv4没了，还有ipv6嘛，号称“其地址数量号称可以为全世界的每一粒沙子编上一个地址”[\[1\]]。
 
-
 ## 折腾
 
 一开始当然是善用搜索引擎，去搜索怎么开启ipv6。
@@ -55,7 +54,6 @@ cover: https://s2.loli.net/2022/06/28/nglZKh8Mivc3BAF.png
 
 ![QQ图片20220627164134.jpg](https://s2.loli.net/2022/06/27/QIOFoJiTcw2kylP.jpg)
 
-
 这回就成功用上ipv6了。。
 
 ## 结语
@@ -67,6 +65,5 @@ cover: https://s2.loli.net/2022/06/28/nglZKh8Mivc3BAF.png
 ~~（也不知道什么时候能用ipv6开mc的服务器~~
 
 update: 无法访问是因为windows的防火墙，😅
-
 
 [\[1\]]:https://www.sohu.com/a/208692922_99958604
