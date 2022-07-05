@@ -76,7 +76,7 @@ katex:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: http://q1.qlogo.cn/g?b=qq&nk=2187778735&s=140
+favicon: images/favicon.ico
 
 # Avatar (頭像)
 avatar:
