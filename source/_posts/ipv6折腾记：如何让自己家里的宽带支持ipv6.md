@@ -8,6 +8,7 @@ category:
   - 折腾  
 description: 让我的家庭宽带用上ipv6
 cover: https://s2.loli.net/2022/06/28/nglZKh8Mivc3BAF.png
+url_title: use_ipv6
 ---
 
 ## 缘起

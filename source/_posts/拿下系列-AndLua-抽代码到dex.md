@@ -9,6 +9,7 @@ tags:
   - Lua
 cover: https://s2.loli.net/2022/06/28/l3PFWxeEKMpQIBV.png
 description: 轻松破解andlua的抽代码到dex
+url_title: andlua_fuck_1
 ---
 
 ## 前言

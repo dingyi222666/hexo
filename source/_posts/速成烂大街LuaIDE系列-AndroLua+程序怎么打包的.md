@@ -8,6 +8,7 @@ tags:
   + Lua
 cover: https://s2.loli.net/2023/01/21/g7GsvZHkIoCj6OY.webp
 description: 轻松破解andlua的抽代码到dex
+url_title: androlua_build_analysis
 ---
 
 ## 前情提要
