@@ -1,11 +1,11 @@
 ---
-title: 速成烂大街LuaIDE系列-AndroLua+程序怎么打包的
+title: 速成烂大街LuaIDE系列：AndroLua+程序怎么打包的
 date: 2023-01-21 04:58:24
 categories:
-  + 学习
+  - 学习
 tags:
-  + AndroLua
-  + Lua
+  - AndroLua
+  - Lua
 cover: https://s2.loli.net/2023/01/21/g7GsvZHkIoCj6OY.webp
 description: 轻松破解andlua的抽代码到dex
 url_title: androlua_build_analysis
