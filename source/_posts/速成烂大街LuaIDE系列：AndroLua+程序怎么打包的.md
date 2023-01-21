@@ -7,13 +7,13 @@ tags:
   - AndroLua
   - Lua
 cover: https://s2.loli.net/2023/01/21/g7GsvZHkIoCj6OY.webp
-description: 轻松破解andlua的抽代码到dex
+description: bin.lua 源码分析
 url_title: androlua_build_analysis
 ---
 
 ## 前情提要
 
-在[上期](https://blog.dingyi222666.top/2022/06/28/%E6%8B%BF%E4%B8%8B%E7%B3%BB%E5%88%97-AndLua-%E6%8A%BD%E4%BB%A3%E7%A0%81%E5%88%B0dex/)文章中，我有说过要新开一个坑，讲讲大部分 Android 上的 `Lua《IDE》` 怎么打包的。
+在[上期](https://blog.dingyi222666.top/article/andlua_fuck_1)文章中，我有说过要新开一个坑，讲讲`bin.lua`怎么实现打包的
 
 今天我这是来填坑了。
 
@@ -954,3 +954,9 @@ end
 比较可悲的是有一些人都还没怎么会，就直接用bin.lua给androlua换了个UI就写出来所谓Lua《IDE》了。至少你得学学andlua嘛，人家后续也是有加上了java编译(感觉没大用)的功能。
 
 下期还不知道出什么，评论区留言？
+
+## 参考
+
+1. [从构建工具看 Android APK 编译打包流程](https://cloud.tencent.com/developer/article/1814090)
+
+
