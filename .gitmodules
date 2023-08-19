@@ -1,3 +1,6 @@
 [submodule "themes/butterfly"]
 	path = themes/butterfly
 	url = git@github.com:jerryc127/hexo-theme-butterfly.git
+[submodule "themes/volantis"]
+	path = themes/volantis
+	url = git@github.com:volantis-x/hexo-theme-volantis.git
