@@ -53,10 +53,16 @@
 
     window.onload = async function () {
         /*  animation(document.getElementById('jinrishici-sentence').parentElement); */
+        const element = document.getElementById('jinrishici-sentence')
+
+        if (!element) {
+            return
+        }
+
         const response = await fetch("https://v1.hitokoto.cn")
         const text = (await response.json()).hitokoto
 
-        document.getElementById('jinrishici-sentence').innerText = text
+        element.innerText = text
 
     }
 

@@ -356,7 +356,7 @@ article:
 comments:
   title: <i class='fa-solid fa-comments'></i> 评论
   subtitle:
-  service: vssue
+  service: giscus
   # 可选评论系统 #
 
   # artalk
@@ -387,14 +387,14 @@ comments:
   # https://github.com/laymonage/giscus
   giscus:
     # 以下配置按照 yml 格式增删填写即可
-    # repo: xxx/xxx
-    # repo-id: xxx
-    # category: xxx
-    # category-id: xxx
-    # mapping: "pathname"
-    # reactions-enabled: "1"
-    # emit-metadata: "0"
-    # lang: "zh-CN"
+    repo: dingyi222666/gitalk-comments
+    repo-id: R_kgDOHkUFBA
+    category: Announcements
+    category-id: DIC_kwDOHkUFBM4CYuzy
+    mapping: "pathname"
+    reactions-enabled: "1"
+    emit-metadata: "0"
+    lang: "zh-CN"
     # 以上配置按照 yml 格式增删填写即可
     theme:
       light: "light" # https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/css/giscus/light.css
@@ -448,19 +448,19 @@ comments:
   # https://gitalk.github.io/
   gitalk:
     # 配置项按照yml格式继续填写即可 除了 [id distractionFreeMode] 选项
-    clientId: ee1fb987b3079fb315da
-    clientSecret: deca8d9aea31dbb6fe6effafa77580ca1c9ccdf2
-    repo: gitalk-comments
-    owner: dingyi222666
-    admin: dingyi222666
+    clientId: 
+    clientSecret: 
+    repo: 
+    owner: 
+    admin: 
     path: # 全局评论地址
 
   # https://vssue.js.org/zh/
   vssue:
-    owner: dingyi222666
-    repo: gitalk-comments
-    clientId: ee1fb987b3079fb315da
-    clientSecret: deca8d9aea31dbb6fe6effafa77580ca1c9ccdf2
+    owner: 
+    repo: 
+    clientId: 
+    clientSecret: 
 
   # https://www.livere.com
   livere:
