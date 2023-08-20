@@ -3,14 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "7.0.0-rc2"
+    "version": "6.3.0"
   },
   "dependencies": {
-    "hexo": "^7.0.0-rc2",
+    "hexo": "^6.3.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^3.0.0",
     "hexo-generator-search": "^2.4.3",
+    "hexo-generator-searchdb": "^1.4.1",
     "hexo-generator-tag": "^2.0.0",
     "hexo-reference": "^1.0.4",
     "hexo-related-popular-posts": "^5.0.1",
@@ -23,6 +24,7 @@
   },
   "scripts": {
     "dev": "hexo server -p $PORT",
-    "build": "bash ./vercel.sh"
+    "build": "bash ./vercel.sh",
+    "build@local": "hexo generate"
   }
 }
