@@ -8,7 +8,7 @@ tags:
   - Ubuntu
   - Android
   - 刷机
-description: 手机体验安装 Linux 系统
+description: 尝试在手机上安装 Linux 系统
 url_title: meizu_pro5_install_ubuntu_touch
 ---
 
@@ -171,8 +171,7 @@ Finished. Total time: 0.005s
 
 ## 刷入 TeamwinRecovery
 
-从[这里](https://drive.google.com/file/d/1T30ug5TQqzRxZiKsFk3IhpR5c218N4Pc/view
-?usp=sharing)下载 TWRP。
+从[这里](https://drive.google.com/file/d/1T30ug5TQqzRxZiKsFk3IhpR5c218N4Pc/view?usp=sharing)下载 TWRP。
 
 然后执行这个指令刷入 TWRP
 
@@ -216,8 +215,8 @@ Finished. Total time: 0.795s
 
 [^3]: [魅族PRO 5安装Ubuntu Touch系统](https://unixetc.com/post/meizu-pro-5-installs-ubuntu-touch-system/)
 
-[^4]: [[TUTORIAL] Unlock the bootloader of Meizu PRO 5](https://forum.xda-developers.com/t/tutorial-unlock-the-bootloader-of-meizu-pro-5.3303127/)
+[4]: [[TUTORIAL] Unlock the bootloader of Meizu PRO 5](https://forum.xda-developers.com/t/tutorial-unlock-the-bootloader-of-meizu-pro-5.3303127/)
 
-[^5]: [Meizu Pro 5 Flyme OS To Ubuntu Touch + modem Update + Fingerprint Function.](https://forums.ubports.com/topic/2755/meizu-pro-5-flyme-os-to-ubuntu-touch-modem-update-fingerprint-function)
+[5]: [Meizu Pro 5 Flyme OS To Ubuntu Touch + modem Update + Fingerprint Function.](https://forums.ubports.com/topic/2755/meizu-pro-5-flyme-os-to-ubuntu-touch-modem-update-fingerprint-function)
 
-[^6]: [真-魅族旗舰-Pro 5爆刷ubuntu touch，体验另类荣光](https://www.coolapk.com/feed/22297272?shareKey=MjNlZTM0OGExMDQ3NjQxNWZkZGM~&shareFrom=com.coolapk.market_13.0.2)
+[6]: [真-魅族旗舰-Pro 5爆刷ubuntu touch，体验另类荣光](https://www.coolapk.com/feed/22297272?shareKey=MjNlZTM0OGExMDQ3NjQxNWZkZGM~&shareFrom=com.coolapk.market_13.0.2)

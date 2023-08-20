@@ -7,7 +7,7 @@ tags:
   - AndroLua
   - Lua
 headimg: https://s2.loli.net/2023/01/21/g7GsvZHkIoCj6OY.webp
-description: bin.lua 源码分析
+description: androlua 的 bin.lua 源码分析
 url_title: androlua_build_analysis
 ---
 
