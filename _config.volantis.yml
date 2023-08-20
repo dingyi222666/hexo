@@ -171,7 +171,7 @@ cover:
   background: https://cdn.staticaly.com/gh/dingyi222666/gitalk-comments/main/background_1.jpg
   # background: https://bing.ioliu.cn/v1/rand?w=1920&h=1200
   logo: # https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-Cover@3x.png
-  title: 'dingyi‘s blog'
+  title: "dingyi's blog"
   subtitle: ''
   search: Search... # search bar placeholder
   features:
