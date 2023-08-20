@@ -168,7 +168,7 @@ cover:
     home: true
     archive: true
     others: false # can be written in front-matter 'cover: true'
-  background: https://cdn.staticaly.com/gh/dingyi222666/gitalk-comments/main/background_1.jpg
+  background: https://cdn.jsdelivr.net/gh/dingyi222666/gitalk-comments/background_1.jpg
   # background: https://bing.ioliu.cn/v1/rand?w=1920&h=1200
   logo: # https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-Cover@3x.png
   title: "dingyi's blog"
@@ -815,7 +815,7 @@ plugins:
     duration: 10000       # Duration (ms)
     fade: 1500            # fade duration (ms) (Not more than 1500)
     images:               # For personal use only. At your own risk if used for commercial purposes !!!
-      - https://cdn.staticaly.com/gh/dingyi222666/gitalk-comments/main/background_1.jpg
+      - https://cdn.jsdelivr.net/gh/dingyi222666/gitalk-comments/background_1.jpg
 
   # APlayer is only available in mainland China.
   # https://aplayer.js.org/#/zh-Hans/
