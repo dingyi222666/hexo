@@ -356,7 +356,7 @@ article:
 comments:
   title: <i class='fa-solid fa-comments'></i> 评论
   subtitle:
-  service: gitalk
+  service: vssue
   # 可选评论系统 #
 
   # artalk
@@ -457,10 +457,10 @@ comments:
 
   # https://vssue.js.org/zh/
   vssue:
-    owner:
-    repo:
-    clientId:
-    clientSecret:
+    owner: dingyi222666
+    repo: gitalk-comments
+    clientId: ee1fb987b3079fb315da
+    clientSecret: deca8d9aea31dbb6fe6effafa77580ca1c9ccdf2
 
   # https://www.livere.com
   livere:
