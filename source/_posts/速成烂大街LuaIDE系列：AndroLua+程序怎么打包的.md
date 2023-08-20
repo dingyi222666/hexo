@@ -1,12 +1,12 @@
 ---
-title: 速成烂大街LuaIDE系列：AndroLua+程序怎么打包的
+title: 速成烂大街 LuaIDE 系列：AndroLua+ 程序怎么打包的
 date: 2023-01-21 04:58:24
 categories:
   - 学习
 tags:
   - AndroLua
   - Lua
-cover: https://s2.loli.net/2023/01/21/g7GsvZHkIoCj6OY.webp
+headimg: https://s2.loli.net/2023/01/21/g7GsvZHkIoCj6OY.webp
 description: bin.lua 源码分析
 url_title: androlua_build_analysis
 ---
@@ -21,7 +21,7 @@ url_title: androlua_build_analysis
 
 OK，进入正题。
 
-相信大部分用过 `AndroLua+` 的人（以及基于此的衍生编辑器），都在感叹于 `Lua` 的免安装运行，以及那飞快的打包速度（对比 `Gradle` 来说，是的）。要想知道为什么 AndroLua+打包这么快，不如先看看与其他更为正式的 Android 构建系统( `Gradle` :?)的打包流程。
+相信大部分用过 `AndroLua+` 的人（以及基于此的衍生编辑器），都在感叹于 `Lua` 的免安装运行，以及那飞快的打包速度（对比 `Gradle` 来说，是的）。要想知道为什么 AndroLua+ 打包这么快，不如先看看与目前指定官方的 Android 项目的构建系统 `Gradle`的打包流程。
 
 ### Gradle 是怎么打包的？
 
@@ -33,23 +33,23 @@ OK，进入正题。
 
 当然了，我们今天并不是来研究 Android 的 Gradle 插件怎么打包的(这东西很复杂，而且我都没啃...)。这里就直接给出简单的结论：
 
-1. 项目的资源文件(res/drawable...)经过 aapt/aapt2 处理(资源编译)生成编译后产物。
-2. 在资源编译时并行处理其他操作，比如编译 Java 和 Kotlin 文件到 Dex(source->class->dex)。
-3. 调用 Zipflinger(旧版本为 Apkbuilder)，将我们之前资源编译，代码编译(native 代码到 so，jvm 字节码到 dex)，以及 assets 等项目内其他资源文件夹都打包成 zip 文件。
-4. 调用 ApkSigner 签名，并且在 ZipAlign 对齐，基本就产出了你的项目打包出来的 Apk。
+1. 项目的资源文件(res/drawable,...)经过 aapt/aapt2 处理(资源编译)生成编译后产物。
+2. 在资源编译时并行处理其他操作，比如编译 java 和 kotlin 文件到 dex(source->class->dex)。
+3. 调用 zipflinger(旧版本为 apkbuilder)，将我们之前资源编译，代码编译 (native 代码到 so，jvm 字节码到 dex)，以及  assets 等项目内其他资源文件夹都打包成 zip 文件。
+4. 调用 apksigner 签名，签名后 zipalign 对齐，就产出了打包出来的 apk。
 
-看起来还挺复杂的吧，哈哈。其实这已经是我很简化的情况了，真正的 Android Gralde Plugin 打包流程比这个复杂的多。不过整体的流程基本都是这样。
+看起来还挺复杂的吧，哈哈。其实这已经是我简化了很多步骤的情况，真正的 Android Gradle Plugin 打包流程比这个复杂的多，不过整体的流程基本是这样。
 
-现在你可以要问，那这和 AndroLua+打包有啥关系啊？其实 AndroLua+也是实现了类似这么一套的打包流程。但是，他简化了很多东西，从根本上就能比 Gradle 打包快了，还使用了某些黑科技。往下看就知道了。
+现在你可以要问，那这和 AndroLua+ 打包有啥关系啊？其实 AndroLua+ 也是实现了类似这么一套的打包流程。但是，他简化了很多东西，从根本上就能比 Gradle 打包快了，还使用了某些黑科技。往下看就知道了。
 
-### 那 AndroLua+呢？
+### 那 AndroLua+ 呢？
 
-AndroLua+的打包流程就简单多了，由于我还不太会画流程图，这边就描述一下过程吧。
+AndroLua+ 的打包流程就简单多了，由于我还不太会画流程图，这边就描述一下过程吧。
 
 1. 获取当前运行的软件的 apk，做为底包
 2. 检查项目的 lua 代码文件，正则匹配出有那些 so 库或者 lua 库是需要塞进目标 apk 的(不需要的就不加进去了缩小体积)
 3. 添加项目文件到目标 apk 的 assets 目录下，并且遍历底包的文件也添加进去
-   1. 如果为项目文件的 welcome.png, icon.png，这两个特殊文件需要塞进 res/drawable 里替换底包文件以实现替换图标和启动图（还是会添加进 assets 里面)
+   1. 如果为项目文件的 welcome.png, icon.png，这两个特殊文件需要塞进 res/drawable 里替换底包文件以实现替换图标和启动图（还是会添加进 assets 里面）
    2. 如果为底包的 AndroidManifest.xml，则使用 mao.dex 编辑 axml 属性，更改包名，targetSdk，权限等属性。
    3. 如果为项目文件的可编译文件(lua/aly)，则在编译后放入目标 apk。
    4. 如果为底包的 dex 或者资源文件，直接添加进去(不用编译了)
@@ -58,15 +58,17 @@ AndroLua+的打包流程就简单多了，由于我还不太会画流程图，�
 
 看文字描述，是不是感觉比上面 gradle 的打包流程感觉多了？但是这基本上可以描述整个打包代码的实际逻辑了。而不是上面那样的抽象。
 
-对比一下我们也可以看到，AndroLua+的打包流程少了很多东西。主要是资源编译和 dex 编译，只需要编译 lua 代码文件，其他的都使用旧的底包。这样就不需要调用其他工具来编译资源和 dex 文件了，自然速度就快了许多。
+对比一下我们也可以看到，AndroLua+ 的打包流程少了很多东西。主要是资源编译和 dex 编译，只需要编译 lua 代码文件，其他的都使用旧的底包。这样就不需要调用其他工具来编译资源和 dex 文件了，自然速度就快了许多。
 
-看到这基本上也得出结论了吧？基本上标题需要讲的内容就到这了。但是只是这样怎么行？不上点代码干货可不行。接下来就开始从代码层面讲 AndroLua+怎么打包的。
+看到这基本上也得出结论了吧？基本上标题需要讲的内容就到这了。但是只是这样怎么行？不上点代码干货可不行。接下来就开始从代码层面讲  AndroLua+ 怎么打包的。
 
-下面的源码分析需要你有一定的lua基础和java基础，否则可直接下滑查看后面的省流(总结)
+下面的源码分析需要你有一定的 lua 基础和 java 基础，否则可直接下滑查看后面的省流(总结)
 
 ## 源码分析
 
-先贴个 `bin.lua` 的无注释源码。
+AndroLua+ 是使用 `bin.lua` 提供函数来进行打包的，下面先贴个 `bin.lua` 的无注释源码。
+
+{% folding bin.lua 源码 %}
 
 ```lua
 require "import"
@@ -477,11 +479,13 @@ end
 return bin
 ```
 
+{% endfolding %}
+
 400 多行就实现了打包功能，不得不说还是很简洁的(指代码大小)。
 
 其实阅读这部分代码也不算难，我们只需要关注 `binapk` 函数就可以了。它接收两个参数，一个是项目路径，一个是打包生成 apk 的路径。
 
-接下来来一步步阅读，剖开本质内核。
+接下来来一步步跟随我带注释的源码阅读，剖开内核本质。
 
 ### 1. 检查哪些库需要导入
 
@@ -526,22 +530,22 @@ local code = activity.getPackageManager(getPackageInfo(activity.getPackageName()
 local zipFile = File(info.publicSourceDir)
 local fis = FileInputStream(zipFile);
 --local checksum = CheckedInputStream(fis, Adler3());
---从zipFile到这都是创建底包的输入流(读取底包数据)
+--从 zipFile 到这都是创建底包的输入流(读取底包数据)
 local zis = ZipInputStream(BufferedInputStream(fis);
 local fot = FileOutputStream(tmp)
 --local checksum2 = CheckedOutputStream(fot,Adler32();
---zip输出流，写入到临时的apk产物
+--zip 输出流，写入到临时的 apk 产物
 local out = ZipOutputStream(BufferedOutputStrea(fot))
 local f = File(luapath)
---打包时产生错误的缓存buffer，因为就算中途打包失败也不能直接抛错，而是需要捕获处理，到后面清理缓存完了在报错
+--打包时产生错误的缓存 buffer，因为就算中途打包失败也不能直接抛错，而是需要捕获处理，到后面清理缓存完了在报错
 local errbuffer = {}
---这个表有点复杂，通俗的说就是一个{path:boolean}这样格式的表，左边的是路径，右边的是布尔值，表示是否已经添加(替换)到了目标apk中,如果为false的话在后续会在从底包里添加进去。
+--这个表有点复杂，通俗的说就是一个 {path:boolean} 这样格式的表，左边的是路径，右边的是布尔值，表示是否已经添加(替换)到了目标 apk 中,如果为 false 的话在后续会在从底包里添加进去。
 local replace = {}
---这个表用于检测当前需要从底包导入的lua/so库，是否已经导入过了
+--这个表用于检测当前需要从底包导入的 lua/so 库，是否已经导入过了
 local checked = {}
---lua的导入库库列
+--lua 的导入库库列
 local lualib = {}
---部分文件的md5集合，这个东西不用管。
+--部分文件的 md5 集合，这个东西不用管。
 local md5s = {}
 local libs = File(activityApplicationInfonativeLibraryDir).list()
 --这里是获取so库列表
@@ -553,15 +557,15 @@ libs = luajava.astable(libs)
 继续看导入库的部分
 
 ```lua
---遍历so库
+--遍历 so 库
 for k, v in ipairs(libs) do
     --libs[k]="lib/armeabi/"..libs[k]
-    --设置为ture，也就是默认不打包进去
+    --设置为 ture，也就是默认不打包进去
     replace[v] = true
 end
 
 local mdp = activity.Application.MdDir
---获取底包里面"./lua/"的乱库文件
+--获取底包里面 "./lua/" 的底库文件
 local function getmodule(dir)
     local mds = File(activity.Application.MdDir .. dir).listFiles()
     --获取文件对象转成列表
@@ -571,8 +575,8 @@ local function getmodule(dir)
         if mds[k].isDirectory() then
             getmodule(dir .. mds[k].Name .. "/")
         else
-            --这里设置一遍mds[k]的意义是啥？？
-            --反正就是拼接出来lua库路径，设置默认不打包进去
+            --这里设置一遍 mds[k] 的意义是啥？？
+            --反正就是拼接出来 lua 库路径，设置默认不打包进去
             mds[k] = "lua" .. dir .. mds[k].Name
             replace[mds[k]] = true
         end
@@ -581,23 +585,23 @@ end
 
 getmodule("/")
 
---检查代码里有那些库是需要打包进apk的
---path就是代码路径
+--检查代码里有那些库是需要打包进 apk 的
+--path 就是代码路径
 local function checklib(path)
     --导入过了就不用再次导入了
     if checked[path] then
         return
     end
     local cp, lp
-    --设置为true，也就是导入过
+    --设置为 true，也就是导入过
     checked[path] = true
     local f = io.open(path)
     local s = f:read("*a")
     f:close()
-    --读取代码文件并且正则匹配(检测require)
+    --读取代码文件并且正则匹配(检测 require)
     for m, n in s:gmatch("require *%(? *\"([%w_]+)%.?([%w_]*)") do
-        --m第一层路径,n第二层路径
-        --例如,import "loadlayout" 这里只有一层路径。
+        --m 第一层路径, n 第二层路径
+        --例如, import "loadlayout" 这里只有一层路径。
         --import "socket.t" 这里就有第二层路径了。
 
         --cp就是转换为so库的路径
@@ -610,20 +614,20 @@ local function checklib(path)
             --一层路径
             lp = string.format("lua/%s.lua", m)
         end
-        --是lib库吗？是的话设置为false，那就是需要导入了。
+        --是 lib 库吗？是的话设置为 false，那就是需要导入了。
         if replace[cp] then
             replace[cp] = false
         end
-        --是lua库？
+        --是 lua 库？
         if replace[lp] then
-            --检测lua库文件锁需要导入的其他lua文件
+            --检测 lua 库文件锁需要导入的其他 lua 文件
             checklib(mdp .. "/" .. m .. ".lua")
             --设置为需要导入
             replace[lp] = false
             lualib[lp] = mdp .. "/" .. m .. ".lua"
         end
     end
-    --如上，只是换成检测import
+    --如上，只是换成检测 import
     for m, n in s:gmatch("import *%(? *\"([%w_]+)%.?([%w_]*)") do
         cp = string.format("lib%s.so", m)
         if n ~= "" then
@@ -649,12 +653,12 @@ end
 ### 2.编译项目lua代码
 
 ```lua
---设置libluajava.so为false，也就是强制需要这个库(毕竟是lua实现库)
+--设置 libluajava.so 为 false，也就是强制需要这个库(毕竟是 lua 实现库)
 replace["libluajava.so"] = false
 
---添加文件夹到apk的assets上，
+--添加文件夹到 apk 的 assets 上，
 local function addDir(out, dir, f)
-    --创建一个ZipEntry
+    --创建一个 ZipEntry
     local entry = ZipEntry("assets/" .. dir)
     out.putNextEntry(entry)
     --获取传入的文件夹的列表
@@ -665,9 +669,9 @@ local function addDir(out, dir, f)
         if name==(".using") then
             --这个是主动声明需要导入的库文件，注意不会添加进去
             checklib(luapath .. dir .. name)
-        --apk，luac不打包进去？    
+        -- apk，luac 不打包进去？    
         elseif name:find("%.apk$") or name:find("%.luac$") or name:find("^%.") then
-        --是lua代码
+        --是 lua 代码
         elseif name:find("%.lua$") then
             --检查引入库
             checklib(luapath .. dir .. name)
@@ -675,15 +679,15 @@ local function addDir(out, dir, f)
             local path, err = console.build(luapath .. dir .. name)
             if path then
                 if replace["assets/" .. dir .. name] then
-                    --重复aly和lua
+                    --重复 aly 和 lua
                     table.insert(errbuffer, dir .. name .. "/.aly")
                 end
-                --放入zip元素
+                --放入 zip 元素
                 local entry = ZipEntry("assets/" .. dir .. name)
                 out.putNextEntry(entry)
-                --设置已经加进去apk
+                --设置已经加进去 apk
                 replace["assets/" .. dir .. name] = true
-                --真正的复制加入进去apk
+                --真正的复制加入进去 apk
                 copy(FileInputStream(File(path)), out)
                 --不关心
                 table.insert(md5s, LuaUtil.getFileMD5(path))
@@ -698,9 +702,9 @@ local function addDir(out, dir, f)
             --编译文件
             local path, err = console.build(luapath .. dir .. name)
             if path then
-                --已经编译成了变成lua代码（包装而已），就替换名字为lua
+                --已经编译成了变成 lua 代码（包装而已），就替换名字为 lua
                 name = name:gsub("aly$", "lua")
-                --重复lua和aly
+                --重复 lua 和 aly
                 if replace["assets/" .. dir .. name] then
                     table.insert(errbuffer, dir .. name .. "/.aly")
                 end
@@ -736,7 +740,7 @@ this.update("正在编译...");
 if f.isDirectory() then
     --导入权限库
     require "permission"
-    --直接dofile，甚至都没用load设置env我哭死
+    --直接 dofile，甚至都没用 load 设置 env 我哭死
     dofile(luapath .. "init.lua")
     --项目需要的权限列表
     if user_permission then
@@ -746,19 +750,19 @@ if f.isDirectory() then
         end
     end
 
-    --pcall处理下免得直接给抛错了,这里调用addDir就是开始扫描项目里的assets
+    --pcall 处理下免得直接给抛错了,这里调用 addDir 就是开始扫描项目里的 assets
     local ss, ee = pcall(addDir, out, "", f)
     if not ss then
         table.insert(errbuffer, ee)
     end
     --print(ee,dump(errbuffer),dump(replace))
 
-    --检测是否有icon
+    --检测是否有 icon
     local wel = File(luapath .. "icon.png")
     if wel.exists() then
         local entry = ZipEntry("res/drawable/icon.png")
         out.putNextEntry(entry)
-        --有的话设置为true，避免等会遍历底包文件时候重复加入
+        --有的话设置为 true，避免等会遍历底包文件时候重复加入
         replace["res/drawable/icon.png"] = true
         copy(FileInputStream(wel), out)
     end
@@ -767,14 +771,14 @@ if f.isDirectory() then
     if wel.exists() then
         local entry = ZipEntry("res/drawable/welcome.png")
         out.putNextEntry(entry)
-         --有的话设置为true，避免等会遍历底包文件时候重复加入
+         --有的话设置为 true，避免等会遍历底包文件时候重复加入
         replace["res/drawable/welcome.png"] = true
         copy(FileInputStream(wel), out)
     end
 else
     return "error"
 end
---遍历lua库，编译然后加入到apk
+--遍历 lua 库，编译然后加入到 apk
 for name, v in pairs(lualib) do
     local path, err = console.build(v)
     if path then
@@ -792,7 +796,7 @@ end
 ### 3.复制底包文件到目标apk
 
 ```lua
---axml替换数字
+--axml 替换数字
 function touint32(i)
     local code = string.format("%08x", i)
     local uint = {}
@@ -804,35 +808,35 @@ end
 
 this.update("正在打包...");
 local entry = zis.getNextEntry();
---这里是把底包之前的文件都给加入目标apk去
+--这里是把底包之前的文件都给加入目标 apk 去
 while entry do
     local name = entry.getName()
     --正则匹配so
     local lib = name:match("([^/]+%.so)$")
     --如果底包的这个文件在之前就加入过了就跳过
     if replace[name] then
-      --是否加入so过（或者说是否需要加入)
+      --是否加入 so过（或者说是否需要加入)
     elseif lib and replace[lib] then
-    --不加入底包的assets
+    --不加入底包的 assets
     elseif name:find("^assets/") then
-    --不加入底包的lua
+    --不加入底包的 lua
     elseif name:find("^lua/") then
     --不加入签名相关配置文件
     elseif name:find("META%-INF") then
     else
-        --创建新的entry
+        --创建新的 entry
         local entry = ZipEntry(name)
         out.putNextEntry(entry)
-        --是否为AndroidManifest？
+        --是否为 AndroidManifest？
         if entry.getName() == "AndroidManifest.xml" then
-            --这里的path_pattern应该是前面dofile的结果，就是声明能打开的文件关联的后缀
+            --这里的 path_pattern 应该是前面 dofile 的结果，就是声明能打开的文件关联的后缀
             if path_pattern and #path_pattern > 1 then
                 path_pattern = ".*\\\\." .. path_pattern:match("%w+$")
             end
             local list = ArrayList()
             --解码axml
             local xml = AXmlDecoder.read(list, zis)
-            --需要替换的东西 key是原来的，value是目标
+            --需要替换的东西 key 是原来的，value 是目标
             local req = {
                 --当前软件的包名
                 [activity.getPackageName()] = 
@@ -841,12 +845,12 @@ while entry do
                 [info.nonLocalizedLabel] = appname,
                 --版本号
                 [ver] = appver,
-                --alua的文件关联后缀，不要了。
+                --alua 的文件关联后缀，不要了。
                 [".*\\\\.lua"] = "",
                 [".*\\\\.luac"] = "",
             }
 
-            --读取xml的字段
+            --读取 xml 的字段
                 local xml = AXmlDecoder.read(list, zis)
                 local req = {
                     [activity.getPackageName()] = packagename,
@@ -864,7 +868,7 @@ while entry do
                     req[".*\\\\.alp"] = ".*\\\\."..path_pattern
                     req["application/alp"] = "application/"..path_pattern
                 end
-                --遍历amxl字段列表
+                --遍历 amxl字段列表
                 for n = 0, list.size() - 1 do
                     local v = list.get(n)
                     --需要替换
@@ -873,7 +877,7 @@ while entry do
                     --呃，如果是权限的话
                     elseif user_permission then
                         local p = v:match("%.permission%.([%w_]+)$")
-                        --这里搞笑的是alua是全权限的，也就是说，它是过滤你不设置的权限为空权限，剩下的就都是你设置的权限了。
+                        --这里搞笑的是 alua 是全权限的，也就是说，它是过滤你不设置的权限为空权限，剩下的就都是你设置的权限了。
                         if p and (not user_permission[p]) then
                             list.set(n, "android.permission.UNKNOWN")
                         end
@@ -881,14 +885,14 @@ while entry do
                 end
                 local pt = activity.getLuaPath(".tmp")
                 local fo = FileOutputStream(pt)
-                --写入编辑后的到axml缓存文件里
+                --写入编辑后的到 axml 缓存文件里
                 xml.write(list, fo)
                 local code = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).versionCode
                 fo.close()
                 local f = io.open(pt)
                 local s = f:read("a")
                 f:close()
-                --直接替换数字常量的版本号，sdk等
+                --直接替换数字常量的版本号，sdk 等
                 s = string.gsub(s, touint32(code), touint32(tointeger(appcode) or 1),1)
                 s = string.gsub(s, touint32(18), touint32(tointeger(appsdk) or 18),1)
 
@@ -896,12 +900,12 @@ while entry do
                 f:write(s)
                 f:close()
                 local fi = FileInputStream(pt)
-                --打到apk里
+                --打到 ap k里
                 copy(fi, out)
                 --删除缓存
                 os.remove(pt)
             elseif not entry.isDirectory() then
-                --其他的就直接复制到apk里了，注意是zip流不能关所以用的copy2
+                --其他的就直接复制到 apk 里了，注意是 zip 流不能关所以用的 copy2
                 copy2(zis, out)
             end
 
@@ -909,7 +913,7 @@ while entry do
         entry = zis.getNextEntry()
     end
 end  
---md5表用在这。。
+-- md5 表用在这。。
 out.setComment(table.concat(md5s))
     --print(table.concat(md5s,"/n"))
 zis.close();
@@ -923,17 +927,17 @@ out.close()
 --没有出错的话
 if #errbuffer == 0 then
     this.update("正在签名...");
-    --删除旧的apk
+    --删除旧的 apk
     os.remove(apkpath)
     --签名
     Signer.sign(tmp, apkpath)
-    --删除tmp
+    --删除 tmp
     os.remove(tmp)
-    --启动安装apk
+    --启动安装 apk
     activity.installApk(apkpath)
     return "打包成功:" .. apkpath
 else
-    --删除tmp
+    --删除 tmp
     os.remove(tmp)
     --弹出打包错误
     this.update("打包出错:\n " .. table.concat(errbuffer, "\n"));
@@ -947,16 +951,14 @@ end
 
 总结一下AndroLua+的打包流程吧。
 
-> 它通过使用底包，检查导入库等方式，尽量用最小的库和代码实现打包功能，有很快的打包速度。由于本身是基于lua实现的，lua是可动态运行的，替换assets基本就可以实现一半的打包了。
+> 它通过使用底包，检查导入库等方式，尽量用最小的库和代码实现打包功能，有很快的打包速度。由于本身是基于lua实现的，lua是可动态运行的，替换 assets 基本就可以实现一半的打包了。
 
 其实熟读`bin.lua`还是很有用的，比如你可以扩展导入库的路径，自己用签名库等等，这是作为一个Lua《IDE》的基本功。
 
-比较可悲的是有一些人都还没怎么会，就直接用bin.lua给androlua换了个UI就写出来所谓Lua《IDE》了。至少你得学学andlua嘛，人家后续也是有加上了java编译(感觉没大用)的功能。
+比较可悲的是有一些人都还没怎么会，就直接用 bin.lua 给 androlua换了个 UI 就写出来所谓 Lua《IDE》了。至少你得学学andlua 嘛，人家后续也是有加上了 java 编译(感觉没大用)的功能。
 
 下期还不知道出什么，评论区留言？
 
 ## 参考
 
 1. [从构建工具看 Android APK 编译打包流程](https://cloud.tencent.com/developer/article/1814090)
-
-

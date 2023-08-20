@@ -1,0 +1,15 @@
+- group: 小伙伴们
+  description: 
+  items:
+    - title: Jasmine Blog
+      url: https://blog.dianas.cyou
+      avatar: https://blog.dianas.cyou/img/favicon.png
+      description: A ordinary blog
+
+- group: 工具
+  description:
+  items:
+    - title: Hexo
+      url: https://hexo.io/zh-tw/
+      avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+      description: 快速、简单且强大的静态博客框架     

@@ -1,5 +1,5 @@
 ---
-title: 拿下系列:AndLua+抽代码到dex
+title: "拿下系列: AndLua+ 抽代码到 dex"
 date: 2022-06-28 03:40:20
 categories:
   - 逆向
@@ -7,30 +7,30 @@ tags:
   - 拿下
   - AndroLua
   - Lua
-cover: https://s2.loli.net/2022/06/28/l3PFWxeEKMpQIBV.png
-description: 轻松破解andlua的抽代码到dex
+headimg: https://s2.loli.net/2022/06/28/l3PFWxeEKMpQIBV.png
+description: 轻松破解 andlua 的抽代码到 dex
 url_title: andlua_fuck_1
 ---
 
 ## 前言
 
-最近想新开一个拿下系列，专门研究下androlua逆向相关的东西，正好之前也有提到过AndLua+的抽代码到dex，先拿这个开刀。
+最近想新开一个拿下系列，专门研究下 androlua 逆向相关的东西，正好之前也有提到过 AndLua+ 的抽代码到dex，先拿这个开刀。
 
 ## 样本分析
 
-在AndLua+的设置里，可以开启抽代码到dex的开关，开启之后所有的lua文件都会在编译后抽离放入dex里面。
+在 AndLua+ 的设置里，可以开启抽代码到 dex 的开关，开启之后所有的 lua 文件都会在编译后抽离放入 dex 里面。
 
 新建一个项目随便写点东西，在打包就可以拿到样本去分析了。
 
-用jadx打开，看样本差不多是这样的
+用 jadx 打开，看样本差不多是这样的
 
 ![这是样本](https://s2.loli.net/2022/06/28/wSfnOdiDrzXcUq5.png)
 
-因为这个项目里面没有塞其他的文件，都是lua文件，所以assets目录没了。毕竟lua文件都被抽取到dex里了嘛。
+因为这个项目里面没有塞其他的文件，都是 lua 文件，所以 assets 目录没了。毕竟 lua 文件都被抽取到 dex 里了嘛。
 
-基于对AndroLua系app的共通性，我们直奔LuaActivity去，不过andlua作者改了点东西，他把LuaActivity类移动到`com.andlua.LuaActivity`去了。
+鉴于对 AndroLua 系 app 的共通性，我们直奔 `LuaActivity` 去，不过 andlua 作者改了点东西，他把 `LuaActivity` 类移动到`com.andlua.LuaActivity`去了。
 
-问题不大，直接上来跟踪onCreate，一下子就发现了点东西
+问题不大，直接上来跟踪 `onCreate`，一下子就发现了点东西
 
 ```java
 /** decompiled for jadx */
@@ -63,28 +63,28 @@ try {
 
 ```
 
-看反编译的代码，首先从当前活动的intent接收到了一个为String类型的值，key为`LuaCode`，不出所料就是可运行的代码了。
+看反编译的代码，首先从当前活动的 intent 接收到了一个为 String类型的值，key 为`LuaCode`，不出所料就是可运行的代码了。
 
-接下来先运行了一次doString方法，导入了`import`这个基于androlua+的lua软件基本都会用到的库，再导入了`com.andlua.R`这个类。
+接下来先运行了一次 `doString` 方法，导入了`import`这个基于Androlua+ 的 lua 软件基本都会用到的库，再导入了`com.andlua.R`这个类。
 
-> 这里提示一下，由于andlua+和androlua+一样，打包方式都是基于自身的apk去打包，并不会重新编译resource资源，所以这个R类是共通的，有兴趣的话我可以单独开一篇详解androlua+的打包。
+> 这里提示一下，由于 andlua+ 和 androlua+ 一样，打包方式都是基于自身的 apk 去打包，并不会重新编译 resource 资源，所以这个R类是共通的，有兴趣的话我可以单独开一篇详解 androlua+ 的打包。
 
-下面这两句就比较重要了，先new了一个StringBuffer，然后添加了一串文本`"function andlua_main(...)"`，再往下看，对获取到的`LuaCode`做了两次替换,替换完了也添加进去StringBuffer，最后添加一个`end`。这段也很好理解，就是把需要运行的代码做了个替换，然后包裹成诸如下面的形式
+下面这两句就比较重要了，先 new 了一个 `StringBuffer`，然后添加了一串文本`"function andlua_main(...)"`，再往下看，对获取到的`LuaCode`做了两次替换,替换完了也添加进去 `StringBuffer`，最后添加一个`end`。这段也很好理解，就是把需要运行的代码做了个替换，然后包裹成诸如下面的形式
 
 ```lua
 function andlua_main(...) code end
 ```
 
-注意这是全局函数，定义之后会被注册在全局表里面，也就是可以使用luajava提供的全局值操作能力去操作它，例如`runFunc`就是使用了这样的api。
+注意这是全局函数，定义之后会被注册在全局表里面，也就是可以使用 luajava 提供的全局值操作能力去操作它，例如`runFunc`就是使用了这样的 api。
 
 下面这句直接就调用了刚才定义的函数，也就是运行了代码。
 
-我们先分析onCreate到这里，现在我们就知道了几个信息
+我们先分析 onCreate 到这里，现在我们就知道了几个信息
 
 - 直接运行的代码很可能是明文代码，否则不应该对代码进行替换
-- onCreate里面不涉及到代码的解密操作，实际的代码早就在进入活动前就被拿出来（解密）了
+- onCreate 里面不涉及到代码的解密操作，实际的代码早就在进入活动前就被拿出来（解密）了
 
-接下来我们查看AndroidManifest.xml，很快就找到了主活动类的位置
+接下来我们查看 AndroidManifest.xml，很快就找到了主活动类的位置
 
 ```xml
 <activity android:name="com.andlua.Main">
@@ -95,7 +95,7 @@ function andlua_main(...) code end
 </activity>
 ```
 
-点进去`com.andlua.Main`分析一下，还是先看onCreate。
+点进去`com.andlua.Main`分析一下，还是先看 `onCreate`。
 
 ```java
 /** decompiled for jadx */
@@ -127,7 +127,7 @@ try {
 
 相信眼尖的人一下就看出来这句代码了`intent.putExtra("LuaCode", AndluaTool.getLuaCode("main"));`
 
-可以看到就是调用了AndluaTool的一个getLuaCode方法，我们点进去这个类去看下方法实现
+可以看到就是调用了 `AndluaTool` 的一个 `getLuaCode` 方法，我们点进去这个类去看下方法实现
 
 ```java
 /** decompiled for jadx */
@@ -147,13 +147,13 @@ public static String getLuaCode(String str) {
 }
 ```
 
-逻辑很简单，就是动态加载一个类，前缀为`com.andlua.andlua_`，后面跟着传进来的str，在获取类的所有字段（包括私有)。
+逻辑很简单，就是动态加载一个类，前缀为`com.andlua.andlua_`，后面跟着传进来的 str，在获取类的所有字段（包括私有）。
 如果获取到的数组为空，就返回空字符，这个我们可以先猜测是因为这个代加载的类里没有对于的代码就返回空（不确定）。
-不为空的话就获取第一个字段，并且新建这个类的对象去获取这个字段的值并且用toString转为String，同时调用`decrypt(String,int)`这个方法传入刚才toString的对象和传进来str的长度并且返回他的值。
+不为空的话就获取第一个字段，并且新建这个类的对象去获取这个字段的值并且用 `toString` 转为 `String`，同时调用`decrypt(String,int)`这个方法传入刚才 `toString` 的对象和传进来str的长度并且返回他的值。
 
-到这里，在结合刚才Main类的分析，基本能判断出这个getLuaCode需要传的就是需要加载的lua的文件名。
+到这里，在结合刚才 `Main` 类的分析，基本能判断出这个 `getLuaCode`需要传的就是需要加载的 lua 的文件名。
 
-下面继续分析`decrypt(String,int)`系列的实现，这里我准备贴出来整个类的代码，一段段贴太杂了。。。
+下面继续分析 `decrypt(String,int)` 系列的实现，这里我准备贴出来整个类的代码，一段段贴太杂了。。。
 
 ```java
 /** decompiled for jadx */
@@ -207,9 +207,9 @@ public class AndluaTool {
 }
 ```
 
-可以看到，最核心的解密方法是`decrypt(String, String)`，前面我们看到的`decrypt(String,int)`也是调用了这个方法，但是对传的第二个参数做了层层运算。从这里我们也可以判断出第二个参数就是密钥，第一个参数就是待解密的字符串。
+可以看到，最核心的解密方法是 `decrypt(String, String)`，前面我们看到的 `decrypt(String,int)`也是调用了这个方法，但是对传的第二个参数做了层层运算。从这里我们也可以判断出第二个参数就是密钥，第一个参数就是待解密的字符串。
 
-下面来分析下`decrypt(String,int)`里面对第二个参数(密钥)的处理。
+下面来分析下 `decrypt(String,int)` 里面对第二个参数(密钥)的处理。
 
 ```java
 decrypt(str,
@@ -224,9 +224,9 @@ d(
 ```
 
 这样一格式化，是不是感觉好分析多了？
-这个密钥就是对传进来的i，加上了一个LuaActivity的mWidthF，然后再乘以对Main.F的解密出来的值（转成Long）
+这个密钥就是对传进来的 i，加上了一个 `LuaActivity` 的`mWidthF`，然后再乘以对 `Main.F` 的解密出来的值（转成Long）
 
-通过查看这两个字段的定义，发现都是`public static final`常量值，其中mWidthF的值为`int mWidthF = 4`,F的值为`String F = "BF26AFC25EF730B449BFDFD95A6F0373";`
+通过查看这两个字段的定义，发现都是 `public static final`常量值，其中 `mWidthF` 的值为`int mWidthF = 4`,`F` 的值为`"BF26AFC25EF730B449BFDFD95A6F0373"`
 
 所以上面的这段代码也等价于下面的代码
 
@@ -256,14 +256,14 @@ d(
 ))
 ```
 
-在分析下`decrypt(String,String)`,
-可以看到用我们的密钥创建了一个SecretKeySpec类，并且做了一些初始化。最后对传入的字符串做一次`hex2byte`之后放入Cipher类实例中去参与解密并返回解密后的值。
+在分析下 `decrypt(String,String)`,
+可以看到用我们的密钥创建了一个 `SecretKeySpec` 类，并且做了一些初始化。最后对传入的字符串做一次`hex2byte`之后放入 `Cipher` 类实例中去参与解密并返回解密后的值。
 
 至此，基本把样本分析完成了。下面就是写反编译代码的部分，其实看到这里你完全可以自己动手写一个反编译的实现，研究样本我会提供在文章的底部。
 
 ## 反编译代码实现
 
-这部分没啥好说的，照抄AndluaTool的实现都可以，只不过要注意在LuaActivity里面运行的时候对代码做了一次替换，这个别忘记了。下面贴出来我用kotlin的实现。
+这部分没啥好说的，照抄 `AndluaTool` 的实现都可以，只不过要注意在 `LuaActivity` 里面运行的时候对代码做了一次替换，这个别忘记了。下面贴出来我用 kotlin 的实现。
 
 ```kotlin
 import javax.crypto.Cipher
@@ -311,15 +311,15 @@ fun decodeWithClass(clazz: Class<*>): String {
 
 fun main() {
     //这里是我们要反编译代码的类，可以替换成你自己的类名
-    //需要注意的是类需要在加载环境里面，对于电脑上的jvm可以dex2jar之后在加载
+    //需要注意的是类需要在加载环境里面，对于电脑上的 jvm 可以 dex2jar 之后在加载
     println(decodeWithClass(Class.forName("com.andlua.andlua_main")))
 }
 ```
 
 ## 结语
 
-今天好好折腾了一下这个拉胯的不行的抽代码到dex的破解，这种所谓加密加固可以说是只防小白了。。。
+今天好好折腾了一下这个拉胯的不行的抽代码到 dex 的破解，这种所谓加密加固可以说是只防小白了。。。
 
-不过考虑到andlua现在也差不多g了，那只能说是好似了。
+不过考虑到 andlua 现在也差不多似了，那只能说是好似了。
 
 样本下载地址：[https://wwc.lanzoul.com/iZXEV0716nyh](https://wwc.lanzoul.com/iZXEV0716nyh)
