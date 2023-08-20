@@ -7,7 +7,7 @@ tags:
   - 拿下
   - AndroLua
   - Lua
-headimg: https://s2.loli.net/2022/06/28/l3PFWxeEKMpQIBV.png
+headimg: https://s2.loli.net/2023/08/20/LUFjp8qIsT71kXg.webp
 description: 轻松破解 andlua 的抽代码到 dex
 url_title: andlua_fuck_1
 ---
