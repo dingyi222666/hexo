@@ -14,7 +14,7 @@ favicon: images/favicon.ico
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://dingyi222666.top
+url: http://blog.dingyi222666.top
 root: /
 permalink: article/:url_title/
 permalink_defaults:
