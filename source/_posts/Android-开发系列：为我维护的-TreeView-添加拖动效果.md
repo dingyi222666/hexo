@@ -12,7 +12,7 @@ url_title: android_develop_series_add_drag_effect_to_treeview
 
 ## 前言
 
-大半夜维护 [ChatHub](https://github.com/ChatHubLab/chathub)，忽然看到我之前写的 [TreeView](https://github.com/dingyi222666/TreeView) 有人提了个 [issue](https://github.com/dingyi222666/TreeView/issues/8)，说想要一个拖放的效果。
+大半夜维护 [ChatLuna](https://github.com/ChatLunaLab/chatluna)，忽然看到我之前写的 [TreeView](https://github.com/dingyi222666/TreeView) 有人提了个 [issue](https://github.com/dingyi222666/TreeView/issues/8)，说想要一个拖放的效果。
 
 我一想，我们这个 TreeView 其实就是在 RecyclerView 上的实现，那么这个效果其实就是给 RecyclerView 添加的效果，那么就可以直接用 [ItemTouchHelper](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper) 来实现。
 
