@@ -10,3 +10,4 @@ public/
 .vercel
 package-lock.json
 yarn.lock
+.vscode/settings.json
