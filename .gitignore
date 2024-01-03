@@ -11,3 +11,4 @@ public/
 package-lock.json
 yarn.lock
 .vscode/settings.json
+.yarn/install-state.gz

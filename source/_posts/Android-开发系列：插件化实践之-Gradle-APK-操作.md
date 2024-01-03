@@ -17,9 +17,9 @@ url_title: android_develop_series_gradle_apk_operation
 
 准备在里面实现加载插件，也就是插件化的效果。
 
-在开发的时候，希望能测试从 apk 里加载插件的效果，但是又不想每次都手动复制粘贴插件的 apk 包到项目的 assets 目录下。
+在开发的时候，想测试从 apk 里加载插件的效果，但是又不想手动复制插件的 apk 包，到项目的 assets 目录下。
 
-于是就想到了用 Gradle，在打插件包的时候把插件包的 apk 自动复制到主项目的 assets 目录下。
+于是想到了用 Gradle，在打插件包的时候把插件包的 apk ，自动复制到主项目的 assets 目录下。
 
 ## 实现
 
