@@ -1,5 +1,5 @@
 ---
-title: Android-开发系列：插件化实践之 Gradle APK 重命名
+title: Android 开发系列：插件化实践之 Gradle APK 重命名
 date: 2024-01-03 21:32:27
 categories:
   - 学习
@@ -147,7 +147,6 @@ android {
 ## 总结
 
 这是一个简单的需求，但是我花了几小时，查询了不少文档才实现的。。。
-
 
 如果有更好的实现方式，欢迎留言。
 
