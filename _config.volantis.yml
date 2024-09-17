@@ -1263,13 +1263,13 @@ custom_css:
     footnote: .78125rem
   fontfamily:
     logofont:
-      fontfamily: '"LXGW WenKai GB Screen", "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
+      fontfamily: '"LXGW WenKai GB Screen", system-ui'
       # name: 'LXGW WenKai GB Screen'
       # url: https://cdn.jsdelivr.net/npm/cn-fontsource-lxgw-wen-kai-gb-screen@1.0.6/font.min.css # https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf
       # weight: normal
       # style: normal
     bodyfont:
-      fontfamily: '"JetBrains Mono", "LXGW WenKai GB Screen", "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
+      fontfamily: '"JetBrains Mono", "LXGW WenKai GB Screen", system-ui'
       name: 'JetBrains Mono'
       url: https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/fonts/webfonts/JetBrainsMono-Medium.woff2 # https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/UbuntuMono/UbuntuMono-Regular.ttf
       weight: normal
