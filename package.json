@@ -1,31 +1,33 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
-  "private": true,
-  "hexo": {
-    "version": "7.0.0"
-  },
-  "dependencies": {
-    "hexo": "^7.0.0",
-    "hexo-generator-archive": "^2.0.0",
-    "hexo-generator-category": "^2.0.0",
-    "hexo-generator-feed": "^3.0.0",
-    "hexo-generator-index": "^3.0.0",
-    "hexo-generator-json-content": "^4.2.3",
-    "hexo-generator-search": "^2.4.3",
-    "hexo-generator-tag": "^2.0.0",
-    "hexo-reference": "^1.0.4",
-    "hexo-related-popular-posts": "^5.0.1",
-    "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-marked": "^6.0.0",
-    "hexo-renderer-pug": "^3.0.0",
-    "hexo-renderer-stylus": "^3.0.0",
-    "hexo-server": "^3.0.0",
-    "hexo-wordcount": "^6.0.1"
-  },
-  "scripts": {
-    "dev": "hexo server -p 4001",
-    "build": "bash ./vercel.sh",
-    "build@local": "hexo generate"
-  }
+    "name": "hexo-site",
+    "version": "0.0.0",
+    "private": true,
+    "hexo": {
+        "version": "7.3.0"
+    },
+    "dependencies": {
+        "hexo": "^7.3.0",
+        "hexo-generator-archive": "^2.0.0",
+        "hexo-generator-category": "^2.0.0",
+        "hexo-generator-feed": "^3.0.0",
+        "hexo-generator-index": "^4.0.0",
+        "hexo-generator-json-content": "^4.2.3",
+        "hexo-generator-search": "^2.4.3",
+        "hexo-generator-tag": "^2.0.0",
+        "hexo-offline": "^2.0.1",
+        "hexo-reference": "^1.0.4",
+        "hexo-related-popular-posts": "^5.0.1",
+        "hexo-renderer-ejs": "^2.0.0",
+        "hexo-renderer-marked": "^6.3.0",
+        "hexo-renderer-pug": "^3.0.0",
+        "hexo-renderer-stylus": "^3.0.1",
+        "hexo-server": "^3.0.0",
+        "hexo-wordcount": "^6.0.1"
+    },
+    "scripts": {
+        "dev": "hexo server -p 4001",
+        "build": "bash ./vercel.sh",
+        "build@local": "hexo generate"
+    },
+    "packageManager": "yarn@4.3.1+sha512.af78262d7d125afbfeed740602ace8c5e4405cd7f4735c08feb327286b2fdb2390fbca01589bfd1f50b1240548b74806767f5a063c94b67e431aabd0d86f7774"
 }

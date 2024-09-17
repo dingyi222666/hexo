@@ -168,7 +168,7 @@ cover:
     home: true
     archive: true
     others: false # can be written in front-matter 'cover: true'
-  background: https://cdn.jsdelivr.net/gh/dingyi222666/gitalk-comments/background_1.jpg
+  background: https://gcore.jsdelivr.net/gh/dingyi222666/gitalk-comments/background_1.jpg
   # background: https://bing.ioliu.cn/v1/rand?w=1920&h=1200
   logo: # https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-Cover@3x.png
   title: "dingyi's blog"
@@ -1263,13 +1263,13 @@ custom_css:
     footnote: .78125rem
   fontfamily:
     logofont:
-      fontfamily: '"HarmonyOS_Sans_SC_Medium", "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
-      name: 'HarmonyOS_Sans_SC_Medium'
-      url: https://cdn.jsdelivr.net/gh/irozhi/HarmonyOS-Sans/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Medium.woff2 # https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf
-      weight: normal
-      style: normal
+      fontfamily: '"LXGW WenKai GB Screen", "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
+      # name: 'LXGW WenKai GB Screen'
+      # url: https://cdn.jsdelivr.net/npm/cn-fontsource-lxgw-wen-kai-gb-screen@1.0.6/font.min.css # https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf
+      # weight: normal
+      # style: normal
     bodyfont:
-      fontfamily: '"JetBrains Mono", "HarmonyOS_Sans_SC_Medium", "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
+      fontfamily: '"JetBrains Mono", "LXGW WenKai GB Screen", "PingFang SC", "Microsoft YaHei", Helvetica, Arial'
       name: 'JetBrains Mono'
       url: https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/fonts/webfonts/JetBrainsMono-Medium.woff2 # https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/UbuntuMono/UbuntuMono-Regular.ttf
       weight: normal
