@@ -1275,7 +1275,7 @@ custom_css:
       weight: normal
       style: normal
     codefont:
-      fontfamily: 'JetBrains Mono, Monaco'
+      fontfamily: 'JetBrains Mono, Monaco, LXGW WenKai GB Screen'
       # name: 'Monaco'
       # url: volantis-static/media/fonts/Monaco/Monaco.ttf # https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/Monaco/Monaco.ttf
       # weight: normal
