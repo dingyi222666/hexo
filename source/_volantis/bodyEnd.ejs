@@ -1,116 +1,145 @@
 <script>
-const binft = (element) => {
-    let isTransparent = false;
-    const getRandomColor = () => isTransparent ? (isTransparent = false, "rgba(255,255,255,0)") : (isTransparent = true, "rgba(255,255,255,1)");
-
-    const createSpans = (count) => {
-        const fragment = document.createDocumentFragment();
-        for (let i = 0; i < count; i++) {
-            const span = document.createElement("span");
-            span.textContent = "_"; // 末尾字符，可改为"|"作为光标样式
-            span.style.color = getRandomColor();
-            fragment.appendChild(span);
-        }
-        return fragment;
-    };
-
-    const getRandomSentences = async () => {
-        const fetchHitokoto = async () => {
-            try {
-                const response = await fetch('https://v1.hitokoto.cn');
-                if (!response.ok) throw new Error('Failed to fetch hitokoto');
-                const data = await response.json();
-                return data.hitokoto;
-            } catch (error) {
-                console.error('Error fetching hitokoto:', error);
-                return null;
+    const binft = (element) => {
+        const getRandomColor = () => {
+            const baseColor = getComputedStyle(document.body).getPropertyValue('--color-text').trim();
+            // 确保颜色格式为 rgb 或 rgba
+            const rgbMatch = baseColor.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)$/);
+            if (rgbMatch) {
+                // 如果是 rgb 或 rgba 格式，返回不透明的 rgb 颜色
+                return `rgb(${rgbMatch[1]}, ${rgbMatch[2]}, ${rgbMatch[3]})`;
             }
+            // 如果是其他格式（如十六进制），直接返回
+            return baseColor;
+        }
+
+        const createCursor = () => {
+            const cursor = document.createElement("span");
+            cursor.textContent = "|";
+            cursor.classList.add('breathing-cursor');
+            cursor.style.color = getRandomColor();
+            return cursor;
         };
 
-        const defaultSentences = [
-            "有花堪折直需折,莫待无花空折枝.",
-            "闲居少邻并,草径入荒园.鸟宿池边树,僧敲月下门.",
-            "在天愿作比翼鸟,在地愿为连理枝.",
-        ];
+        let spanElement = null;
+        let cursorElement = null;
 
-        const sentences = [];
-        for (let i = 0; i < 2; i++) {
-            const sentence = await fetchHitokoto();
-            sentences.push(sentence || defaultSentences[i]);
-        }
+        // clear element children
+        element.innerHTML = '';
 
-        return sentences;
-    };
-
-    const config = {
-        showTotalWordDelayTime: 2,
-        refreshDelayTime: 1,
-        maxLength: 1,
-        typingSpeed: 75,
-    };
-
-    const state = {
-        text: "",
-        prefixP: -config.maxLength,
-        skillI: 0,
-        skillP: 0,
-        direction: "forward",
-        delay: config.showTotalWordDelayTime,
-        step: config.refreshDelayTime,
-        wordList: [],
-    };
-
-    const updateText = () => {
-        const currentWord = state.wordList[state.skillI];
-        
-        if (state.step > 0) {
-            state.step--;
-        } else {
-            state.step = config.refreshDelayTime;
-            if (state.prefixP < 0) {
-                state.prefixP++;
-            } else if (state.prefixP < 0) {
-                state.text += 0[state.prefixP];
-                state.prefixP++;
-            } else if (state.direction === "forward") {
-                if (state.skillP < currentWord.length) {
-                    state.text += currentWord[state.skillP];
-                    state.skillP++;
-                } else if (state.delay > 0) {
-                    state.delay--;
-                } else {
-                    state.direction = "backward";
-                    state.delay = config.showTotalWordDelayTime;
+        const getRandomSentences = async () => {
+            const fetchHitokoto = async () => {
+                try {
+                    const response = await fetch('https://v1.hitokoto.cn');
+                    if (!response.ok) throw new Error('Failed to fetch hitokoto');
+                    const data = await response.json();
+                    return data.hitokoto;
+                } catch (error) {
+                    console.error('Error fetching hitokoto:', error);
+                    return null;
                 }
+            };
+
+            const defaultSentences = [
+                "有花堪折直需折,莫待无花空折枝.",
+                "闲居少邻并,草径入荒园.鸟宿池边树,僧敲月下门.",
+                "在天愿作比翼鸟,在地愿为连理枝.",
+            ];
+
+            const sentences = [];
+            for (let i = 0; i < 2; i++) {
+                const sentence = await fetchHitokoto();
+                sentences.push(sentence || defaultSentences[i]);
+            }
+
+            return sentences;
+        };
+
+        const config = {
+            showTotalWordDelayTime: 15,
+            refreshDelayTime: 1,
+            maxLength: 1,
+            typingSpeed: 120,
+            deleteSpeed: 100,
+            pauseBetweenSentences: 8
+        };
+
+        const state = {
+            text: "",
+            prefixP: -config.maxLength,
+            skillI: 0,
+            skillP: 0,
+            direction: "forward",
+            delay: config.pauseBetweenSentences,
+            step: config.refreshDelayTime,
+            wordList: [],
+        };
+
+        const updateText = () => {
+            const currentWord = state.wordList[state.skillI];
+
+            if (state.step > 0) {
+                state.step--;
             } else {
-                if (state.skillP > 0) {
-                    state.text = state.text.slice(0, -1);
-                    state.skillP--;
+                state.step = config.refreshDelayTime;
+                if (state.direction === "forward") {
+                    if (state.skillP < currentWord.length) {
+                        state.text += currentWord[state.skillP];
+                        state.skillP++;
+                    } else if (state.delay > 0) {
+                        state.delay--;
+                    } else {
+                        state.direction = "backward";
+                        state.delay = config.pauseBetweenSentences;
+                    }
                 } else {
-                    state.skillI = (state.skillI + 1) % state.wordList.length;
-                    state.direction = "forward";
+                    if (state.skillP > 0) {
+                        state.text = state.text.slice(0, -1);
+                        state.skillP--;
+                    } else {
+                        state.skillI = (state.skillI + 1) % state.wordList.length;
+                        state.direction = "forward";
+                    }
                 }
             }
-        }
 
-        element.textContent = state.text;
-        element.appendChild(createSpans(
-            state.prefixP < 0 ? 
-                Math.min(config.maxLength, config.maxLength + state.prefixP) : 
-                Math.min(config.maxLength, currentWord.length - state.skillP)
-        ));
+            if (!spanElement) {
+                spanElement = document.createElement("span");
+                element.appendChild(spanElement);
+            }
 
-        setTimeout(updateText, config.typingSpeed);
+            spanElement.textContent = state.text;
+
+            // 确保光标元素存在
+            if (!cursorElement) {
+                cursorElement = createCursor();
+                element.appendChild(cursorElement);
+            }
+
+            // 控制光标的可见性
+            cursorElement.style.display = (state.skillP < currentWord.length || state.direction === "backward") ? 'inline' : 'none';
+
+            setTimeout(updateText, state.direction === "forward" ? config.typingSpeed : config.deleteSpeed);
+        };
+
+        const init = async () => {
+            state.wordList = await getRandomSentences();
+            updateText();
+        };
+
+        init();
     };
 
-    // 初始化函数
-    const init = async () => {
-        state.wordList = await getRandomSentences();
-        updateText();
-    };
+    binft(document.getElementById('jinrishici-sentence').parentNode);
 
-    init();
-};
+    // 使用 MutationObserver 监听 body 样式变化
+    const observer = new MutationObserver(() => {
+        binft(document.getElementById('jinrishici-sentence').parentNode);
+    });
 
-binft(document.getElementById('jinrishici-sentence').parentNode);
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+
+
 </script>

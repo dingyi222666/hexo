@@ -1,5 +1,26 @@
-#l_side .widget
-  @supports (backdrop-filter: blur(20px))
-     background: alpha($color-card, .9) !important
-     backdrop-filter: saturate(200%) blur(20px)
-          
+#jinrishici-sentence .cursor {
+  transition: opacity 0.3s;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+#jinrishici-sentence {
+  display: inline-block;
+  min-height: 1.2em;
+}
+
+@keyframes breathing {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.breathing-cursor {
+  animation: breathing 1.3s ease-in-out infinite;
+}
