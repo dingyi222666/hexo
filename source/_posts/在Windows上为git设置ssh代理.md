@@ -5,6 +5,7 @@ categories: 教程
 tags: 教程
 url_title: set-ssh-proxy-for-git
 description: 在 Windows 上为 git 设置 ssh 代理
+headimg: https://s2.loli.net/2025/01/02/FIuhVcRDJtXHoiM.png
 ---
 
 ## 问题
