@@ -1,13 +1,30 @@
 {
     "headers": [
       {
-        "source": "/(.*).(jpe?g|png|ico|webp|svg|mp4|gif|xml|ttf|woff2?)",
+        "source": "/(.*).(jpe?g|png|ico|webp|svg|mp4|gif|xml|ttf|otf|woff2?)",
         "headers": [
           {
             "key": "Cache-Control",
             "value": "public, max-age=31536000, immutable"
           }
         ]
+      },
+      {
+        "source": "(.*)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, s-maxage=86400, max-age=86400"
+          },
+          {
+            "key": "CDN-Cache-Control",
+            "value": "max-age=86400"
+          },
+          {
+            "key": "Vercel-CDN-Cache-Control",
+            "value": "max-age=86400"
+          }
+        ]
       }
     ]
-  }
+}
