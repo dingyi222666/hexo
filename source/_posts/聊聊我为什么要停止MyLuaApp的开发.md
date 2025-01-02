@@ -8,7 +8,7 @@ tags:
   - AndroLua
   - Lua
 description: 回忆曾经的开发历程，就此画上句号
-url_title: why_stop_myluaapp_develop
+url_title: why-stop-myluaapp-develop
 ---
 
 ## 这是什么？

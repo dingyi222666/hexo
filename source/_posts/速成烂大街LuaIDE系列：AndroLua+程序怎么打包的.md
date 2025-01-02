@@ -8,12 +8,12 @@ tags:
   - Lua
 headimg: https://s2.loli.net/2023/01/21/g7GsvZHkIoCj6OY.webp
 description: androlua 的 bin.lua 源码分析
-url_title: androlua_build_analysis
+url_title: androlua-build-analysis
 ---
 
 ## 前情提要
 
-在[上期](https://blog.dingyi222666.top/article/andlua_fuck_1)文章中，我有说过要新开一个坑，讲讲`bin.lua`怎么实现打包的
+在[上期](https://blog.dingyi222666.top/article/andlua-fuck-1)文章中，我有说过要新开一个坑，讲讲`bin.lua`怎么实现打包的
 
 今天我这是来填坑了。
 

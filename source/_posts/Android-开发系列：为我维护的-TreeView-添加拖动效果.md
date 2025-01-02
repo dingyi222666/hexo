@@ -7,7 +7,7 @@ tags:
   - Android
   - Kotlin
 description: 其实是给 RecyclerView 添加的效果...
-url_title: android_develop_series_add_drag_effect_to_treeview
+url_title: android-develop-series-add-drag-effect-to-treeview
 ---
 
 ## 前言

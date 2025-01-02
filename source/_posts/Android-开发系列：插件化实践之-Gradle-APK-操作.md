@@ -8,7 +8,7 @@ tags:
   - Kotlin
   - Gradle
 description: 折腾几小时 Gradle, 终于实现了一个很简单的需求。。。
-url_title: android_develop_series_gradle_apk_operation
+url_title: android-develop-series-gradle-apk_operation
 ---
 
 ## 背景

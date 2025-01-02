@@ -8,7 +8,7 @@ category:
   - 折腾  
 description: 让我的家庭宽带用上 ipv6
 headimg: https://s2.loli.net/2023/08/20/1sCgRxSVQUBDyqE.webp
-url_title: use_ipv6
+url_title: use-ipv6
 ---
 
 ## 缘起

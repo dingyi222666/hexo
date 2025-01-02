@@ -9,7 +9,7 @@ tags:
   - Lua
 headimg: https://s2.loli.net/2023/08/20/LUFjp8qIsT71kXg.webp
 description: 轻松破解 andlua 的抽代码到 dex
-url_title: andlua_fuck_1
+url_title: andlua-fuck-1
 ---
 
 ## 前言

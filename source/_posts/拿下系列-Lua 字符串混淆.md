@@ -9,7 +9,7 @@ tags:
   - AndroLua
   - Lua
 description: 详解 Lua 字符串混淆
-url_title: lua_string_obfuscation 
+url_title: lua-string-obfuscation 
 ---
 
 ## 前言
