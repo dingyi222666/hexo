@@ -4,17 +4,18 @@ date: 2025-01-02 08:49:05
 categories: 教程
 tags: 教程
 url_title: set-ssh-proxy-for-git
+description: 在 Windows 上为 git 设置 ssh 代理
 ---
 
 ## 问题
 
-最近神秘高墙都开始阻断 github 的 ssh 连接了，导致我无法推送源码到 github 上。
+最近神秘高墙开始经常性阻断 github 的 ssh 连接，导致我无法推送源码到 github 上。
 
 ![d327b203b803582ee704888f81fac9c5.png](https://s2.loli.net/2025/01/02/FIuhVcRDJtXHoiM.png)
 
-针对这种问题，一般都是配置个代理解决。
+针对这种问题，一般都是配置 ssh 代理解决。
 
-google 搜一下，一般给出在 `~/.ssh/config` 里面添加如下配置：
+google 搜一下，一般给出的答案是在 `~/.ssh/config` 里面添加如下配置：
 
 ```bash
 ProxyCommand connect -S 127.0.0.1:10801 -a none %h %p
