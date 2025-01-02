@@ -122,7 +122,7 @@ replace:
 # dns-prefetch preconnect x-dns-prefetch-control
 dns_prefetch:
   - https://unpkg.com
-  - https://cdn.bootcdn.net
+  - https://cdnjs.onmicrosoft.cn/ajax/libs
 
 # 平滑滚动效果
 scroll_smooth: true
