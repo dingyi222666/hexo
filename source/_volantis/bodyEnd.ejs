@@ -1,5 +1,6 @@
 <script>
     const binft = (element) => {
+        if (!element) return;
         const getRandomColor = () => {
             const baseColor = getComputedStyle(document.body).getPropertyValue('--color-text').trim();
             // 确保颜色格式为 rgb 或 rgba
@@ -129,11 +130,11 @@
         init();
     };
 
-    binft(document.getElementById('jinrishici-sentence').parentNode);
+    binft(document.getElementById('jinrishici-sentence')?.parentNode);
 
     // 使用 MutationObserver 监听 body 样式变化
     const observer = new MutationObserver(() => {
-        binft(document.getElementById('jinrishici-sentence').parentNode);
+        binft(document.getElementById('jinrishici-sentence')?.parentNode);
     });
 
     observer.observe(document.body, {
