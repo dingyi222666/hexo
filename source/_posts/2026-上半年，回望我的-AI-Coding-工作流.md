@@ -3,6 +3,7 @@ title: 2026 上半年，回望我的 Vibe Coding 工作流
 date: 2026-06-23 02:52:46
 categories: AI
 tags: [AI, 效率, 工作流]
+url_title: vibe-coding-workflow-2026-h1
 ---
 
 2026 已经过半。这半年里，模型在不断的发展，在某种程度上我没有在「写代码了」。
