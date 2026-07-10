@@ -1,7 +1,7 @@
 ---
 title: 2026 上半年，回望我的 Vibe Coding 工作流
 date: 2026-06-23 02:52:46
-categories: 随笔
+categories: AI
 tags: [AI, 效率, 工作流]
 ---
 
