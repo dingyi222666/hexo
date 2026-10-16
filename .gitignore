@@ -13,3 +13,6 @@ public/
 yarn.lock
 .vscode/settings.json
 .yarn/install-state.gz
+
+# 编辑器备份
+*.bak
