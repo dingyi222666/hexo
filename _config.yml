@@ -9,7 +9,7 @@ description: 随便写写
 keywords: dingyi,dingyi's Blog,dingyi222666
 author: dingyi
 language: zh-CN
-timezone:
+timezone: Asia/Shanghai
 favicon: images/favicon.ico
 
 # URL
@@ -42,24 +42,51 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+excerpt_separator: <!-- more -->
+# `mtime` (Hexo's default) would mark every post as edited on each deploy,
+# because a fresh git clone stamps all files with the checkout time. Keep
+# "edited" honest: it comes from front-matter `updated:`, otherwise it is
+# simply the post date.
+updated_option: date
+
+# Syntax highlighting — the theme styles highlight.js class names.
+syntax_highlighter: highlight.js
 highlight:
-  enable: true
   line_number: false
   auto_detect: false
-  tab_replace:
-popularPosts:
-  eyeCatchImageAttributeName: headimg 
-  
+  tab_replace: ''
+  wrap: true
+  hljs: true
+
+# Markdown rendering (hexo-renderer-markdown-it)
+## Raw HTML is allowed so <details> folding works; heading ids start at h2,
+## which the table-of-contents rail needs.
+##
+## markdown-it-github-alerts is ESM-only and must NOT be listed under plugins —
+## the theme bridges it through a `markdown-it:renderer` filter.
+markdown:
+  preset: default
+  render:
+    html: true
+    breaks: false
+    linkify: false
+    typographer: false
+  anchors:
+    level: 2
+    permalink: false
+  plugins:
+    - markdown-it-footnote
+    - markdown-it-task-lists
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
+# per_page: Posts displayed on each page (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -80,7 +107,20 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: volantis
+theme: noviluna
+
+# Local search index → /search.json (read by the theme's search overlay)
+search:
+  path: search.json
+  field: post
+  content: true
+
+# Feed → /atom.xml (the theme's footer RSS link points here)
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: true
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

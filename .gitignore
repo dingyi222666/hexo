@@ -8,7 +8,8 @@ public/
 .env
 .env.build
 .vercel
-package-lock.json
+# vercel.sh installs with npm, so the npm lockfile is committed for
+# reproducible deploys; the yarn lockfile is not used.
 yarn.lock
 .vscode/settings.json
 .yarn/install-state.gz

@@ -1,7 +1,0 @@
-[submodule "themes/butterfly"]
-	path = themes/butterfly
-	url = https://github.com/jerryc127/hexo-theme-butterfly.git
-[submodule "themes/volantis"]
-	path = themes/volantis
-	url = https://github.com/volantis-x/hexo-theme-volantis.git
-	branch = 6.x

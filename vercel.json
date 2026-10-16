@@ -27,5 +27,12 @@
             ]
         }
     ],
-    "cleanUrls": true
+    "cleanUrls": true,
+    "redirects": [
+        {
+            "source": "/article/meizu-pro5-install-ubuntu/-touch",
+            "destination": "/article/meizu-pro5-install-ubuntu-touch",
+            "permanent": false
+        }
+    ]
 }

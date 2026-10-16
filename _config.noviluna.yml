@@ -1,0 +1,82 @@
+# Noviluna theme configuration for this site.
+#
+# Hexo merges this file into the theme's own _config.yml automatically
+# (any `_config.<theme>.yml` in the site root is picked up), so the theme
+# package stays untouched and updates are safe.
+
+accent: "#2563EB"
+excerpt: true
+
+# Header navigation. Stock labels (Blog / Archives / Tags / Categories /
+# About / Links) are translated through the theme's nav.* i18n keys, so on a
+# zh-CN site this renders as 博客 / 归档 / 标签 / 分类 / 关于 / 友链.
+nav:
+  - label: Blog
+    url: /
+  - label: Archives
+    url: /archives/
+  - label: Tags
+    url: /tags/
+  - label: Categories
+    url: /categories/
+  - label: About
+    url: /about/
+  - label: Links
+    url: /friends/
+
+fonts:
+  geist: true
+  harmonyos: true
+
+meta:
+  updated: true        # "编辑于 …" — only when front-matter sets a later `updated:`
+  wordcount: true      # "共 N 字 · 约 N 分钟"
+  views: false         # enable together with busuanzi below
+
+toc:
+  enable: true
+  max_depth: 3
+
+related_posts:
+  enable: true
+  max: 4
+
+# giscus (GitHub Discussions). Fill in the three values below to switch it on.
+comments:
+  enable: false
+  service: giscus
+  giscus:
+    repo: ""
+    repo_id: ""
+    category: "Announcements"
+    category_id: ""
+    mapping: pathname
+    reactions: false
+    lang: ""
+
+# Page-view counter. Off by default.
+busuanzi:
+  enable: false
+  src: "https://busuanzi.9420.ltd/js"
+  site_uv: false
+  page_pv: true
+
+search:
+  enable: true
+  max_results: 10
+
+footer:
+  copyright: true
+  license: ""            # e.g. "CC BY-NC-SA 4.0"
+  author: "dingyi"
+  powered: true
+  icp: ""                # e.g. "京ICP备00000000号"
+
+# Interface language: follows the browser, falls back to the site language
+# (zh-CN). The footer switch overrides it and is remembered.
+language_switcher: true
+language_auto: true
+
+links_intro:
+  en: "A short list of sites and people worth your time."
+  zh-CN: "一些值得你花时间的网站和人。"

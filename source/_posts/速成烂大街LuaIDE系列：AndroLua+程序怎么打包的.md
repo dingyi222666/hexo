@@ -72,7 +72,9 @@ AndroLua+ 的打包流程就简单多了，这边就描述一下过程吧：
 
 AndroLua+ 是使用 `bin.lua` 提供函数来进行打包的，下面先贴个 `bin.lua` 的无注释源码。
 
-{% folding bin.lua 源码 %}
+<details>
+<summary>bin.lua 源码</summary>
+
 
 ```lua
 require "import"
@@ -483,7 +485,7 @@ end
 return bin
 ```
 
-{% endfolding %}
+</details>
 
 400 多行就实现了打包功能，不得不说还是很简洁的(指代码大小)。
 

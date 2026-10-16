@@ -205,7 +205,9 @@ fun getObfuscationString(string: String): String {
 
 修改 `main` 函数，更换一下我们测试的代码：
 
-{% folding 新的测试代码实现 %}
+<details>
+<summary>新的测试代码实现</summary>
+
 
 ```kotlin
 fun main() {
@@ -243,11 +245,13 @@ val code = """
 
 ```
 
-{% endfolding %}
+</details>
 
 再运行一下，应该会输出下面的代码：
 
-{% folding 混淆后代码 %}
+<details>
+<summary>混淆后代码</summary>
+
 
 ```lua
 local a = utf8.char(104,101,108,108,111,32,119,111,114,108,100,44,32,20320,22909,32,19990,30028)
@@ -280,7 +284,7 @@ print(table.concat(a({}),utf8.char(44)))
 print(c utf8.char(104,101,108,108,111,32,119,111,114,108,100))
 ```
 
-{% endfolding %}
+</details>
 
 完成！
 
@@ -424,7 +428,9 @@ fun stringFog(code: String): String {
 
 完成后重新运行，输出结果如下：
 
-{% folding 混淆后代码 %}
+<details>
+<summary>混淆后代码</summary>
+
 
 ```lua
 local int_pool = {
@@ -470,7 +476,7 @@ print(table.concat(a({}),utf8.char(table.unpack(string_pool[8]))))
 print(c utf8.char(table.unpack(string_pool[1])))
 ```
 
-{% endfolding %}
+</details>
 
 好像还不错！但是现在的常量依旧不够安全，每个表里面都能被直接转换成字符串，我们还需要再加一层保护。
 
@@ -611,7 +617,9 @@ class StringFog{
 
 无需修改 `stringFog` 函数，重新运行一下，看看效果如何：
 
-{% folding 混淆后代码 %}
+<details>
+<summary>混淆后代码</summary>
+
 
 ```lua
 local xor = function (array, key) local result = {} for i = 1, #array do result[i] = array[i] ~ key end return result end
@@ -658,7 +666,7 @@ print(table.concat(a({}),utf8.char(table.unpack(xor(string_pool[8],4049)))))
 print(c utf8.char(table.unpack(xor(string_pool[1],7505))))
 ```
 
-{% endfolding %}
+</details>
 
 这下就好了，常量里面的不同字符串对应的不同的编码，都会对应不同的已经加密的数字和密钥，增强了混淆强度。
 
@@ -781,7 +789,9 @@ fun main() {
 
 运行结果如下：
 
-{% folding 混淆后代码 %}
+<details>
+<summary>混淆后代码</summary>
+
 
 ```lua
 local xor = function (array, key) local result = {} for i = 1, #array do result[i] = array[i] ~ key end return result end
@@ -839,7 +849,7 @@ _G[utf8.char(table.unpack(xor(string_pool[9],1000)))](_G[utf8.char(table.unpack(
 _G[utf8.char(table.unpack(xor(string_pool[9],1000)))](c (utf8.char(table.unpack(xor(string_pool[1],8322)))))
 ```
 
-{% endfolding %}
+</details>
 
 完成！一个支持字符串加密，并且附带一点点字符隐藏建议的字符串混淆就完成啦。
 

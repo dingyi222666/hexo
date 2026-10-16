@@ -1,0 +1,8 @@
+# 友链数据(主题的 /friends/ 页面读取此文件)
+# 格式:[{ name, url, desc }]
+- name: Jasmine Blog
+  url: https://blog.dianas.cyou
+  desc: A ordinary blog
+- name: Hexo
+  url: https://hexo.io/zh-tw/
+  desc: 快速、简单且强大的静态博客框架

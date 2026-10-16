@@ -9,7 +9,7 @@ tags:
   - Android
   - 刷机
 description: 尝试在手机上安装 Linux 系统
-url_title: meizu-pro5-install-ubuntu\-touch
+url_title: meizu-pro5-install-ubuntu-touch
 ---
 
 ## 前言
