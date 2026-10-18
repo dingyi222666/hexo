@@ -1,8 +1,10 @@
 # 友链数据(主题的 /friends/ 页面读取此文件)
-# 格式:[{ name, url, desc }]
+# 格式:[{ name, url, desc, avatar }],avatar 可选
 - name: Jasmine Blog
   url: https://blog.dianas.cyou
   desc: A ordinary blog
+  avatar: https://blog.dianas.cyou/img/favicon.png
 - name: Hexo
   url: https://hexo.io/zh-tw/
   desc: 快速、简单且强大的静态博客框架
+  avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
